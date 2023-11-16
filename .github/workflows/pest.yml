@@ -1,6 +1,6 @@
 name: pest
 
-on: 
+on:
   workflow_call:
     inputs:
       coverage:
@@ -37,11 +37,11 @@ jobs:
         with:
           php-version: 8.2
         env:
-          GITHUB_TOKEN: "${{ secrets.COMPOSER_TOKEN }}"
-      
+          GITHUB_TOKEN: "${{ secrets.AGICOM_TOKEN }}"
+
       - name: Remove local dependencies
         run: composer config repositories.local --unset
-          
+
       - name: Install PHP dependencies
         run: composer install --no-interaction --quiet --no-progress --ansi
 
