@@ -5,12 +5,12 @@ on: workflow_call
 jobs:
   pint:
     runs-on: ubuntu-latest
-    permissions:
-        contents: write
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.AGICOM_TOKEN }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
