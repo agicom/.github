@@ -16,11 +16,11 @@ jobs:
           php-version: 8.2
           coverage: none
         env:
-          GITHUB_TOKEN: "${{ secrets.COMPOSER_TOKEN }}"
-      
+          GITHUB_TOKEN: "${{ secrets.AGICOM_TOKEN }}"
+
       - name: Remove local dependencies
         run: composer config repositories.local --unset
-          
+
       - name: Install PHP dependencies
         run: composer install --no-interaction --quiet --no-scripts --no-plugins --no-progress --ansi
 
