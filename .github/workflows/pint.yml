@@ -1,0 +1,27 @@
+name: pint
+
+on: workflow_call
+
+jobs:
+  pint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          tools: pint
+          coverage: none
+
+      - name: Run Pint
+        run: pint --ansi
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Pint
