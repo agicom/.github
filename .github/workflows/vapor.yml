@@ -23,7 +23,7 @@ jobs:
           tools: vapor
           coverage: none
         env:
-          GITHUB_TOKEN: "${{ secrets.COMPOSER_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.AGICOM_TOKEN }}"
           
       - name: Install PHP dependencies
         run: composer install --no-interaction --quiet --no-progress --ansi --no-dev --optimize-autoloader
