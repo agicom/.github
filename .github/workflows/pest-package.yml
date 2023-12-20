@@ -1,6 +1,13 @@
 name: pest-package
 
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      coverage:
+        description: 'The minimum percentage of coverage'
+        default: 25
+        required: false
+        type: string
 
 jobs:
   test:
