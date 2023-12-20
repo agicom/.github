@@ -10,7 +10,7 @@ on:
         type: string
       os:
         description: 'List of OS'
-        default: '["ubuntu-latest"]'
+        default: '["ubuntu-latest", "windows-latest"]'
         required: false
         type: string
       php:
