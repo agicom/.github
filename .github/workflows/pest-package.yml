@@ -1,13 +1,6 @@
 name: pest-package
 
-on:
-  push:
-    paths:
-      - '**.php'
-      - '.github/workflows/run-tests.yml'
-      - 'phpunit.xml.dist'
-      - 'composer.json'
-      - 'composer.lock'
+on: workflow_call
 
 jobs:
   test:
