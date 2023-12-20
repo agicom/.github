@@ -15,7 +15,17 @@ on:
         type: string
       php:
         description: 'List of PHP Versions'
-        default: '[8.2]'
+        default: '[8.3, 8.2, 8.1]'
+        required: false
+        type: string
+      laravel:
+        description: 'List of PHP Versions'
+        default: '["10.*"]'
+        required: false
+        type: string
+      stability:
+        description: 'List of PHP Versions'
+        default: '["prefer-lowest", "prefer-stable"]'
         required: false
         type: string
 
@@ -28,8 +38,8 @@ jobs:
       matrix:
         os: ${{ fromJSON(inputs.os)}}
         php: ${{ fromJSON(inputs.php)}}
-        laravel: [10.*]
-        stability: [prefer-lowest, prefer-stable]
+        laravel: ${{ fromJSON(inputs.laravel)}}
+        stability: ${{ fromJSON(inputs.stability)}}
         include:
           - laravel: 10.*
             testbench: 8.*
