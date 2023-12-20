@@ -6,28 +6,13 @@ on:
       coverage:
         description: 'The minimum percentage of coverage'
         default: 25
-        type: string
         required: false
+        type: string
       os:
         description: 'List of OS'
         default: '["ubuntu-latest"]'
-        type: string
         required: false
-      php:
-        description: 'PHP Versions'
-        default: '["8.3", "8.2", "8.1]'
         type: string
-        required: false
-      laravel:
-        description: 'Laravel Versions'
-        default: '["10.x"]'
-        type: string
-        required: false
-      stability:
-        description: 'Stability'
-        default: '["prefer-lowest", "prefer-stable"]'
-        type: string
-        required: false
 
 jobs:
   test:
@@ -36,10 +21,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: ${{ fromJSON(github.event.inputs.os)}}
-        php: ${{ fromJSON(inputs.php)}}
-        laravel: ${{ fromJSON(inputs.laravel)}}
-        stability: ${{ fromJSON(inputs.stability)}}
+        os: ${{ fromJSON(inputs.os)}}
+        php: [8.3, 8.2, 8.1]
+        laravel: [10.*]
+        stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 10.*
             testbench: 8.*
