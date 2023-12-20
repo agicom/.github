@@ -36,7 +36,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: ${{ fromJSON(inputs.os)}}
+        os: ${{ fromJSON(github.event.inputs.os)}}
         php: ${{ fromJSON(inputs.php)}}
         laravel: ${{ fromJSON(inputs.laravel)}}
         stability: ${{ fromJSON(inputs.stability)}}
