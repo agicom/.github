@@ -23,6 +23,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.AGICOM_TOKEN }}
 
+      - name: Install dependencies
+        run:
+          composer install --no-interaction
+          npm ci
+
       - name: Run composer lint script
         run: composer lint
 
