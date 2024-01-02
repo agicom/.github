@@ -1,9 +1,9 @@
-name: pint
+name: lint
 
 on: workflow_call
 
 jobs:
-  prettier:
+  pint:
     runs-on: ubuntu-latest
 
     permissions:
@@ -18,16 +18,15 @@ jobs:
         with:
           token: ${{ secrets.AGICOM_TOKEN }}
 
-      - name: Setup Node
-        uses: actions/setup-node@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.AGICOM_TOKEN }}
 
-      - name: Install NPM dependencies
-        run: npm ci
+      - name: Run composer lint script
+        run: composer lint
 
-      - name: Format files
-        run: npm run format
-      
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Apply formatting changes
+          commit_message: Lint
