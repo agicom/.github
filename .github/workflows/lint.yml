@@ -3,7 +3,7 @@ name: lint
 on: workflow_call
 
 jobs:
-  pint:
+  lint:
     runs-on: ubuntu-latest
 
     permissions:
