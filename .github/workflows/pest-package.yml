@@ -70,6 +70,9 @@ jobs:
 
       - name: List Installed Dependencies
         run: composer show -D
+        
+      - name: Build assets
+        run: composer build
 
       - name: Execute tests
         run: vendor/bin/pest --ci --colors="always" --coverage --min=${{ inputs.coverage }}
