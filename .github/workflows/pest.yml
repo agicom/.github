@@ -44,7 +44,7 @@ jobs:
         run: composer config repositories.local --unset
 
       - name: Install PHP dependencies
-        run: composer install --no-interaction --quiet --no-progress --ansi
+        run: composer install --no-interaction --no-progress --ansi
 
       - name: Copy Laravel Environment Configuration File
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
