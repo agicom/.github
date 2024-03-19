@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer install --no-interaction --quiet --no-progress
+          composer install
           npm ci
 
       - name: Run composer lint script
