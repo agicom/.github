@@ -26,7 +26,7 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.AGICOM_TOKEN }}"
           
       - name: Install PHP dependencies
-        run: composer install --no-interaction --quiet --no-progress --ansi --no-dev --optimize-autoloader
+        run: composer install --no-interaction --no-progress --ansi --no-dev --optimize-autoloader
 
       - name: Deploy Environment
         run: vapor deploy ${{ inputs.environment }} --without-waiting --commit=$GITHUB_SHA --message=$GITHUB_REF_NAME
