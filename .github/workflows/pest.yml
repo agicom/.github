@@ -12,11 +12,7 @@ on:
 jobs:
   pest:
     runs-on: ubuntu-latest
-    env:
-      DB_DATABASE: laravel
-      DB_USERNAME: root
-      DB_PASSWORD: password
-
+    
     services:
       mysql:
           image: mysql:latest
@@ -62,3 +58,6 @@ jobs:
         run: php artisan test --ansi --coverage --min=${{ inputs.coverage }}
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
+          DB_DATABASE: laravel
+          DB_USERNAME: root
+          DB_PASSWORD: password
