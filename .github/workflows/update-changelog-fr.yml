@@ -1,0 +1,65 @@
+on: workflow_call
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # updated CHANGELOG back to the repository.
+      # https://github.blog/changelog/2023-02-02-github-actions-updating-the-default-github_token-permissions-to-read-only/
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.target_commitish }}
+          token: ${{ secrets.AGICOM_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install translation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install googletrans==4.0.0-rc1
+
+      - name: Translate Changelog
+        id: translate
+        run: |
+          import os
+          from googletrans import Translator
+
+          release_notes = os.getenv('RELEASE_NOTES')
+          translator = Translator()
+
+          translation = translator.translate(release_notes, src='en', dest='fr')
+          translated_notes = translation.text
+
+          print(f"::set-output name=translated_notes::{translated_notes}")
+
+        env:
+          RELEASE_NOTES: ${{ github.event.release.body }}
+
+      - name: Update changelog_fr.md
+        run: |
+          echo "v${{ github.event.release.tag_name }} - $(date +'%Y-%m-%d')" >> changelog_fr.md
+          echo "Quoi de neuf" >> changelog_fr.md
+          echo "${{ steps.translate.outputs.translated_notes }}" >> changelog_fr.md
+          echo "" >> changelog_fr.md
+
+      - name: Update Changelog
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: ${{ github.event.release.tag_name }}
+          release-notes: ${{ github.event.release.body }}
+
+      - name: Commit updated CHANGELOG
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: ${{ github.event.release.target_commitish }}
+          commit_message: Update CHANGELOG FR
+          file_pattern: CHANGELOG_FR.md
