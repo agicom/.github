@@ -30,6 +30,7 @@ jobs:
       - name: Translate Changelog
         id: translate
         run: |
+          python -c "
           import os
           from googletrans import Translator
 
@@ -39,8 +40,8 @@ jobs:
           translation = translator.translate(release_notes, src='en', dest='fr')
           translated_notes = translation.text
 
-          print(f"::set-output name=translated_notes::{translated_notes}")
-
+          print(f'::set-output name=translated_notes::{translated_notes}')
+          "
         env:
           RELEASE_NOTES: ${{ github.event.release.body }}
 
