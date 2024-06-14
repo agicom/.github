@@ -51,12 +51,6 @@ jobs:
           echo "${{ steps.translate.outputs.translated_notes }}" >> changelog_fr.md
           echo "" >> changelog_fr.md
 
-      - name: Update Changelog
-        uses: stefanzweifel/changelog-updater-action@v1
-        with:
-          latest-version: ${{ github.event.release.tag_name }}
-          release-notes: ${{ github.event.release.body }}
-
       - name: Commit updated CHANGELOG
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
