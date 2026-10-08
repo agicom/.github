@@ -10,7 +10,7 @@ on:
         type: string
       php:
         description: 'The PHP version'
-        default: '8.2'
+        default: '8.4'
         required: false
         type: string
 
